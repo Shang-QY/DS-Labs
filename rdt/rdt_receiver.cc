@@ -115,6 +115,9 @@ void Receiver_FromLowerLayer(struct packet *pkt)
         inc_circularly(expect_seq);
         debug_printf("Handle: seq %d as expected", seq);
         ack(seq);
+        
+        /***********************************************************/
+        /* immidiately put packet to Upper layer */
         struct message *msg = (struct message*) malloc(sizeof(struct message));
         ASSERT(msg!=NULL);
         msg->size = get_pls(pkt);
@@ -140,11 +143,19 @@ void Receiver_FromLowerLayer(struct packet *pkt)
         if (msg->data!=NULL) free(msg->data);
         if (msg!=NULL) free(msg);
         debug_printf("___________________________________________seq: %d, upload message size: %d", seq, get_pls(pkt));
+        /***********************************************************/
+
+        /***********************************************************/
+        /* join packet together to form a message */
         // if(get_last_packet(pkt) == 0){
-        //     buffer.push_back(pkt);
+        //     packet *p = new packet;
+        //     memcpy(p->data, pkt->data, RDT_PKTSIZE);
+        //     buffer.push_back(p);
         // }
         // if(get_last_packet(pkt) == 1){
-        //     buffer.push_back(pkt);
+        //     packet *p = new packet;
+        //     memcpy(p->data, pkt->data, RDT_PKTSIZE);
+        //     buffer.push_back(p);
 
         //     /* construct a message and deliver to the upper layer */
         //     struct message *msg = (struct message*) malloc(sizeof(struct message));
@@ -160,7 +171,9 @@ void Receiver_FromLowerLayer(struct packet *pkt)
 
         //     int cursor = 0;
         //     for(list<packet*>::iterator it = buffer.begin(); it != buffer.end(); ++it){
-        //         memcpy(msg->data + cursor, (*it)->data + HEADER_SIZE, get_pls(*it));
+        //         packet *it_pkt = *it;
+        //         memcpy(msg->data + cursor, it_pkt->data + HEADER_SIZE, get_pls(it_pkt));
+        //         free(it_pkt);
         //         cursor += get_pls(*it);
         //     }
         //     Receiver_ToUpperLayer(msg);
@@ -170,6 +183,7 @@ void Receiver_FromLowerLayer(struct packet *pkt)
         //     if (msg!=NULL) free(msg);
         //     buffer.clear();
         // }
+        /***************************************************************/
     }
     else if(less_than(seq, expect_seq, REC_WINDOW_SIZE)){
         ack(seq);
