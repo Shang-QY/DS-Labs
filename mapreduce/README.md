@@ -1,4 +1,4 @@
-## Lab 1 -  MapReduce
+## Lab 4 -  MapReduce
 
 已完成所有实验内容（包括Part V），测试在macOS + go15上进行并全部通过。
 
