@@ -9,7 +9,7 @@
 ## 包头设计
 包头结构如下表所示：
 
-| checksum1 |   chechsum2  |  sequence/ack number |  payload size  | flag   | payload | 
+| checksum1 |   chechsum2  |  sequence/ack number |  payload size  | flag   | payload |
 | --------  | ------------ | -------------------  | -------------- | ------ | ------  |
 | 2 byte    |  2 byte      |  1 byte              |  1 byte        | 1 byte | rest    |
 
@@ -37,9 +37,8 @@
 
 ## 测试结果
  - 能够通过0.02的正确性测试
- <img src="https://github.com/Shang-QY/DS-Labs/blob/main/images/correct_0.02.png" width="70%">
- 
+ <img src="images/correct_0.02.png" width="70%">
  - 0.15和0.3的性能测试如下
- <img src="https://github.com/Shang-QY/DS-Labs/blob/main/images/ref_0.15.png" width="70%">
- <img src="https://github.com/Shang-QY/DS-Labs/blob/main/images/ref_0.3.png" width="70%">
- 
+ <img src="images/ref_0.15.png" width="70%">
+  <img src="images/ref_0.3.png" width="70%">
+
